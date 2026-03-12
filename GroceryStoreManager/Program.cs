@@ -36,16 +36,16 @@ namespace GroceryStoreManager
                             break;
                      /* case "3":
                             Update(branch);
-                            break;
+                            break; */
                         case "4":
-                            Deleted(branch);
+                            Delete(branch);
                             break;
                         case "5":
                             return;
                             break;
                         default:
                             Console.WriteLine("Please enter ONLY a number!");
-                            break; */
+                            break;
                 }
 
             }
@@ -91,6 +91,27 @@ namespace GroceryStoreManager
                 Console.WriteLine("Invalid Branch Number");
             }
         }
+        static void Delete(List<string> branch)
+        {
+            Console.WriteLine("\n--- Current Branches that are Available ---\n");
+            for (int i = 0; i < branch.Count; i++)
+            {
+                Console.WriteLine((i + 1) + ". " + branch[i]);
+            }
+            Console.WriteLine("Select the number of the branch you want to delete: ");
+            int index = Convert.ToInt32(Console.ReadLine()) - 1;
+
+            if (index > +0 && index < branch.Count)
+            {
+                branch.RemoveAt(index);
+                Console.WriteLine("Branch deleted successfully!");
+            }
+            else
+            {
+                Console.WriteLine("Invalid branch number.");
+            }
+        }
+
     }
 }
 
