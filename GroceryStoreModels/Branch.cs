@@ -1,6 +1,6 @@
 ﻿namespace GroceryStoreModels
 {
-    public class Models
+    public class Branch
     {
         public string ID { get; set; }
         public string Name { get; set; }

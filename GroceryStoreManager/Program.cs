@@ -26,16 +26,16 @@ namespace GroceryStoreManager
                 switch (choice)
                 {
                     case "1":
-                        Create(branch);
+                        Create();
                         break;
                         case "2":
-                            Read(branch);
+                            Read();
                             break;
                      /* case "3":
-                            Update(branch);
+                            Update();
                             break; */
                         case "4":
-                            Delete(branch);
+                            Delete();
                             break;
                         case "5":
                             return;
@@ -102,7 +102,7 @@ namespace GroceryStoreManager
             Console.WriteLine("Select the number of the branch you want to delete: ");
             int index = Convert.ToInt32(Console.ReadLine()) - 1;
 
-            if (index > +0 && index < branch.Count)
+            if (index >= 0 && index < branches.Count)
             {
                 AppService.DeleteBranch(index);
                 Console.WriteLine("Branch deleted successfully!");
