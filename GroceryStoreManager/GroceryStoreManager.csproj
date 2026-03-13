@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GroceryStoreAppService\GroceryStoreAppService.csproj" />
+    <ProjectReference Include="..\GroceryStoreModels\GroceryStoreModels.csproj" />
+  </ItemGroup>
+
 </Project>

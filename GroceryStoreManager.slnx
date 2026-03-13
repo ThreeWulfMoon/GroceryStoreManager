@@ -1,6 +1,6 @@
 <Solution>
   <Project Path="GroceryStoreAppService/GroceryStoreAppService.csproj" Id="d5c07ae9-328b-4047-a02c-fe28e61823cf" />
-  <Project Path="GroceryStoreDL/GroceryStoreDataService.csproj" Id="c1686bca-b472-453c-b908-128ad962bb2c" />
+  <Project Path="GroceryStoreDataService/GroceryStoreDataService.csproj" Id="2abe64d8-66a7-45da-a636-9daf381a19e6" />
   <Project Path="GroceryStoreManager/GroceryStoreManager.csproj" />
   <Project Path="GroceryStoreModels/GroceryStoreModels.csproj" Id="adb198f1-c540-4c86-b743-3074287e62be" />
 </Solution>

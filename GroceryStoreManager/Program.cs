@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using GroceryStoreAppService;
+using GroceryStoreModels;
+
 namespace GroceryStoreManager
 {
     internal class Program
@@ -7,12 +10,6 @@ namespace GroceryStoreManager
         static void Main(string[] args)
         {
             String choice;
-
-            List<string> branch = new List<string>();
-
-            branch.Add("ID: 24 | SupaMart Branch: Pacita | Location: San Pedro, Laguna | Manager: Billy Butcher | Employees: 35");
-            branch.Add("ID: 67 | SupaMart Branch: Santo Tomas | Location: Binan, Laguna | Manager: Hughie Campbell | Employees: 17");
-            branch.Add("ID: 33 | SupaMart Branch: Langkiwa | Location: Binan, Laguna | Manager: David Martinez | Employees: 25");
 
             while (true)
             {
@@ -50,60 +47,64 @@ namespace GroceryStoreManager
 
             }
         }
-        static void Create(List<string> branch)
+        static void Create()
         {
+            Branch b = new Branch();
+
             Console.Write("Enter Branch ID (2 digits): ");
-            string branchID = Console.ReadLine();
+            b.ID = Console.ReadLine();
             Console.Write("Enter the name of the new Branch: ");
-            string branchName = Console.ReadLine();
+            b.Name = Console.ReadLine();
             Console.Write("Enter Location of new Branch: ");
-            string branchLoc = Console.ReadLine();
+            b.Location = Console.ReadLine();
             Console.Write("Enter New Manager: ");
-            string branchManager = Console.ReadLine();
+            b.Manager = Console.ReadLine();
             Console.Write("Enter the Number of Employees you want: ");
-            string branchEmpl = Console.ReadLine();
+            b.Employees = Console.ReadLine(); ;
 
-            string branchy = "ID: " + branchID + " | SupaMart Branch: " + branchName + " | Location: " + branchLoc + " | Manager: " + branchManager + " | Employees: " + branchEmpl;
-
-            branch.Add(branchy);
+            AppService.CreateBranch(b);
 
             Console.WriteLine("New Branch Established!");
         }
 
-        static void Read(List<string> branch)
+        static void Read()
         {
+            List<Branch> branches = AppService.GetBranches();
+
             Console.WriteLine("\n ----- Current SupaMart Branches Available for Viewing ----- \n");
-            for (int i = 0; i < branch.Count; i++)
+            for (int i = 0; i < branches.Count; i++)
             {
-                Console.WriteLine((i + 1) + ". " + branch[i]);
+                Branch b = branches[i];
+                Console.WriteLine((i + 1) + ". ID: " + b.ID + " | Branch: " + b.Name + " | Location: " + b.Location + " | Manager: " + b.Manager + " | Employees: " + b.Employees);
             }
             Console.Write("Select the number of the Branch you want to view: ");
             int index = Convert.ToInt32(Console.ReadLine()) - 1;
 
-            if (index >= 0 && index < branch.Count) {
+            if (index >= 0 && index < branches.Count) {
+                Branch b = branches[index];
                 Console.WriteLine("----- Branch Information -----");
-                Console.WriteLine(branch[index]);
-
-                
+                Console.WriteLine("ID: " + b.ID + " | Branch: " + b.Name + " | Location: " + b.Location + " | Manager: " + b.Manager + " | Employees: " + b.Employees);
             }
             else
             {
                 Console.WriteLine("Invalid Branch Number");
             }
         }
-        static void Delete(List<string> branch)
+        static void Delete()
         {
+            List<Branch> branches = AppService.GetBranches();
+
             Console.WriteLine("\n--- Current Branches that are Available ---\n");
-            for (int i = 0; i < branch.Count; i++)
+            for (int i = 0; i < branches.Count; i++)
             {
-                Console.WriteLine((i + 1) + ". " + branch[i]);
+                Console.WriteLine((i + 1) + ". " + branches[i].Name);
             }
             Console.WriteLine("Select the number of the branch you want to delete: ");
             int index = Convert.ToInt32(Console.ReadLine()) - 1;
 
             if (index > +0 && index < branch.Count)
             {
-                branch.RemoveAt(index);
+                AppService.DeleteBranch(index);
                 Console.WriteLine("Branch deleted successfully!");
             }
             else
