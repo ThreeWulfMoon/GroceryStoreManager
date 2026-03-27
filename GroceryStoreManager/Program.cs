@@ -31,15 +31,14 @@ namespace GroceryStoreManager
                         case "2":
                             Read();
                             break;
-                     /* case "3":
+                         case "3":
                             Update();
-                            break; */
+                            break; 
                         case "4":
                             Delete();
                             break;
                         case "5":
                             return;
-                            break;
                         default:
                             Console.WriteLine("Please enter ONLY a number!");
                             break;
@@ -90,6 +89,47 @@ namespace GroceryStoreManager
                 Console.WriteLine("Invalid Branch Number");
             }
         }
+
+        static void Update()
+        {
+            List<Branch> branches = AppService.GetBranches();
+
+            Console.WriteLine("\n--- Current Branches that are Available for Update ---\n");
+
+            for (int i = 0; i < branches.Count; i++)
+            {
+                Console.WriteLine((i + 1) + ". " + branches[i].Name);
+            }
+
+            Console.Write("Select the number of branch you want to update: ");
+            int index = Convert.ToInt32(Console.ReadLine()) - 1;
+
+            if (index >= 0 && index < branches.Count)
+            {
+                Branch upd = new Branch();
+
+                Console.Write("Enter updated Branch ID (2 digits): ");
+                upd.ID = Console.ReadLine();
+                Console.Write("Enter the name of the updated Branch: ");
+                upd.Name = Console.ReadLine();
+                Console.Write("Enter Location of updated Branch: ");
+                upd.Location = Console.ReadLine();
+                Console.Write("Enter New Manager: ");
+                upd.Manager = Console.ReadLine();
+                Console.Write("Enter the Number of Employees you want: ");
+                upd.Employees = Console.ReadLine();
+
+                AppService.UpdateBranch(index, upd);
+
+                Console.WriteLine("Branch information updated successfully!");
+
+            }
+            else
+            {
+                Console.WriteLine("Your selection was invalid.");
+            }
+        }
+
         static void Delete()
         {
             List<Branch> branches = AppService.GetBranches();
