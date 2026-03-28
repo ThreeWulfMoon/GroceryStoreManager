@@ -1,76 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using GroceryStoreModels;
-using System.Text.Json;
 
 namespace GroceryStoreDataService
 {
     public class DataService
     {
-        private List<Branch> branches = new List<Branch>();
+        IBranchDataService _dataService;
 
-        private string _jsonfileName;
-
-        public DataService()
+        public DataService(IBranchDataService dataService)
         {
-            _jsonfileName = AppDomain.CurrentDomain.BaseDirectory + "/Branches.json";
-            PopulateJsonFile();
+            _dataService = dataService;
         }
 
-        private void PopulateJsonFile()
+        public void Add(Branch branch)
         {
-            LoadFromFile();
-
-            if (branches.Count <= 0)
-            {
-                branches.Add(new Branch { ID = "24", Name = "Pacita", Location = "San Pedro, Laguna", Manager = "Billy Butcher", Employees = "35" });
-                branches.Add(new Branch { ID = "67", Name = "Santo Tomas", Location = "Binan, Laguna", Manager = "Hughie Campbell", Employees = "17" });
-                branches.Add(new Branch { ID = "33", Name = "Langkiwa", Location = "Binan, Laguna", Manager = "David Martinez", Employees = "25" });
-
-                SaveToFile();
-            }
-        }
-        private void LoadFromFile()
-        {
-            if (File.Exists(_jsonfileName))
-            {
-                string jsonString = File.ReadAllText(_jsonfileName);
-
-                if (!string.IsNullOrEmpty(jsonString))
-                {
-                    branches = JsonSerializer.Deserialize<List<Branch>>(jsonString);
-                }
-
-            }
-        }
-        private void SaveToFile()
-        {
-            string json = JsonSerializer.Serialize(branches, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(_jsonfileName, json);
-        }
-
-        public void Add(Branch b)
-        {
-            branches.Add(b);
-            SaveToFile();
+            _dataService.Add(branch);
         }
 
         public List<Branch> GetBranches()
         {
-            LoadFromFile();
-            return branches;
+            return _dataService.GetBranches();
         }
 
-        public void Update(int index, Branch updated)
+        public void Update(int index, Branch branch)
         {
-            branches[index] = updated;
-            SaveToFile();
+            _dataService.Update(index, branch);
         }
 
         public void Delete(int index)
         {
-            branches.RemoveAt(index);
-            SaveToFile();
+            _dataService.Delete(index);
         }
     }
 }
