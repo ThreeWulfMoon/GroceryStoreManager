@@ -7,7 +7,7 @@ namespace GroceryStoreAppService
     public class AppService
     {
 
-        private static DataService data = new DataService(new BranchJsonData());
+        private static DataService data = new DataService(new BranchDBData());
 
         public static void CreateBranch(Branch b)
         {

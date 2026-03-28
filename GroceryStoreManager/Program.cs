@@ -83,7 +83,9 @@ namespace GroceryStoreManager
 
             if (index >= 0 && index < branches.Count) {
                 Branch b = branches[index];
+                Console.WriteLine(" ");
                 Console.WriteLine("----- Branch Information -----");
+                Console.WriteLine(" ");
                 Console.WriteLine("ID: " + b.ID + " | Branch: " + b.Name + " | Location: " + b.Location + " | Manager: " + b.Manager + " | Employees: " + b.Employees);
             }
             else
