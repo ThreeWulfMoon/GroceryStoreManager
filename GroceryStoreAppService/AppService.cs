@@ -6,21 +6,27 @@ namespace GroceryStoreAppService
 {
     public class AppService
     {
+
+        private static DataService data = new DataService();
+
         public static void CreateBranch(Branch b)
         {
-            DataService.branches.Add(b);
+            data.Add(b);
         }
+
         public static List<Branch> GetBranches()
         {
-            return DataService.branches;
+            return data.GetBranches();
         }
-           public static void UpdateBranch(int index, Branch updatedBranch)
+
+        public static void DeleteBranch(int index)
         {
-            DataService.branches[index] = updatedBranch;
+            data.Delete(index);
         }
-             public static void DeleteBranch(int index)
+
+        public static void UpdateBranch(int index, Branch updated)
         {
-            DataService.branches.RemoveAt(index);
+            data.Update(index, updated);
         }
     }
 }
