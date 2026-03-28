@@ -62,15 +62,25 @@ namespace GroceryStoreDataService
             return branches;
         }
 
-        public void Update(int index, Branch updated)
+        public void Update(Branch branch)
         {
-            branches[index] = updated;
-            SaveToFile();
-        }
+            LoadFromFile();
 
-        public void Delete(int index)
+            int ids = branches.FindIndex(b => b.ID == branch.ID);
+            if (ids >= 0)
+                branches[ids] = branch;
+
+            SaveToFile();
+        } 
+
+        public void Delete(string id)
         {
-            branches.RemoveAt(index);
+            LoadFromFile();
+
+            int ids = branches.FindIndex(b => b.ID == id);
+            if (ids >= 0)
+                branches.RemoveAt(ids);
+
             SaveToFile();
         }
     }

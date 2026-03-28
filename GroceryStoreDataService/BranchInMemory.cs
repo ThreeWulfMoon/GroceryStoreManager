@@ -1,4 +1,5 @@
-﻿using GroceryStoreModels;
+﻿using GroceryStoreDataService;
+using GroceryStoreModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +15,7 @@ namespace GroceryStoreDataService
                 branches.Add(new Branch { ID = "24", Name = "Pacita", Location = "San Pedro", Manager = "Billy Butcher", Employees = "35" });
                 branches.Add(new Branch { ID = "67", Name = "Santo Tomas", Location = "Binan, Laguna", Manager = "Hughie Campbell", Employees = "17" });
                 branches.Add(new Branch { ID = "33", Name = "Langkiwa", Location = "Binan, Laguna", Manager = "David Martinez", Employees = "25" });
-            }
+             }
 
             public void Add(Branch branch)
             {
@@ -26,14 +27,24 @@ namespace GroceryStoreDataService
                 return branches;
             }
 
-            public void Update(int index, Branch branch)
+        public void Update(Branch updated)
+        {
+            int index = branches.FindIndex(b => b.ID == updated.ID);
+            if (index >= 0)
             {
-                branches[index] = branch;
+                branches[index] = updated;
             }
+          
+        }
 
-            public void Delete(int index)
+        public void Delete(string id)
+        {
+            int index = branches.FindIndex(b => b.ID == id);
+            if (index >= 0)
             {
                 branches.RemoveAt(index);
             }
+            
         }
     }
+}

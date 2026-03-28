@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using GroceryStoreModels;
+
 using System.Collections.Generic;
 
 namespace GroceryStoreDataService
 {
-    public interface IBranchDataService
+    public class BranchesDB
     {
-        void Add(Branch branch);
-        List<Branch> GetBranches();
-        void Update(Branch branch);
-        void Delete(string id);
 
     }
 }

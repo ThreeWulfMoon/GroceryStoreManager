@@ -19,14 +19,14 @@ namespace GroceryStoreAppService
             return data.GetBranches();
         }
 
-        public static void DeleteBranch(int index)
+        public static void DeleteBranch(string id)
         {
-            data.Delete(index);
+            data.Delete(id);
         }
 
-        public static void UpdateBranch(int index, Branch updated)
+        public static void UpdateBranch(Branch updated)
         {
-            data.Update(index, updated);
+            data.Update(updated);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace GroceryStoreManager
 
             while (true)
             {
+                Console.WriteLine(" ");
                 Console.WriteLine("\n--- Welcome to the Grocery Store Manager, User! ---\n");
                 Console.WriteLine(" ");
                 Console.WriteLine("Please select the number of your choice: ");
@@ -20,6 +21,7 @@ namespace GroceryStoreManager
                 Console.WriteLine("2. View current Branches");
                 Console.WriteLine("3. Update Branch information");
                 Console.WriteLine("4. Delete a Branch");
+                Console.WriteLine(" ");
                 Console.Write("Input Here: ");
                 choice = Console.ReadLine();
 
@@ -95,38 +97,44 @@ namespace GroceryStoreManager
             List<Branch> branches = AppService.GetBranches();
 
             Console.WriteLine("\n--- Current Branches that are Available for Update ---\n");
+            Console.WriteLine(" ");
 
             for (int i = 0; i < branches.Count; i++)
             {
                 Console.WriteLine((i + 1) + ". " + branches[i].Name);
             }
 
-            Console.Write("Select the number of branch you want to update: ");
-            int index = Convert.ToInt32(Console.ReadLine()) - 1;
+            Console.WriteLine(" ");
+            Console.Write("Enter the ID of the branch you want to update: ");
+            string id = Console.ReadLine();
 
-            if (index >= 0 && index < branches.Count)
+            Branch existing = branches.Find(b => b.ID == id);
+
+            if (existing != null)
             {
                 Branch upd = new Branch();
 
-                Console.Write("Enter updated Branch ID (2 digits): ");
-                upd.ID = Console.ReadLine();
-                Console.Write("Enter the name of the updated Branch: ");
+                upd.ID = id;
+
+                Console.Write("Enter the new Branch name: ");
                 upd.Name = Console.ReadLine();
-                Console.Write("Enter Location of updated Branch: ");
+
+                Console.Write("Enter new Location: ");
                 upd.Location = Console.ReadLine();
-                Console.Write("Enter New Manager: ");
+
+                Console.Write("Enter new Manager: ");
                 upd.Manager = Console.ReadLine();
-                Console.Write("Enter the Number of Employees you want: ");
+
+                Console.Write("Enter new number of Employees: ");
                 upd.Employees = Console.ReadLine();
 
-                AppService.UpdateBranch(index, upd);
+                AppService.UpdateBranch(upd);
 
-                Console.WriteLine("Branch information updated successfully!");
-
+                Console.WriteLine("Branch updated successfully!");
             }
             else
             {
-                Console.WriteLine("Your selection was invalid.");
+                Console.WriteLine("Branch ID was invalid/not found.");
             }
         }
 
@@ -139,17 +147,20 @@ namespace GroceryStoreManager
             {
                 Console.WriteLine((i + 1) + ". " + branches[i].Name);
             }
-            Console.WriteLine("Select the number of the branch you want to delete: ");
-            int index = Convert.ToInt32(Console.ReadLine()) - 1;
+            Console.WriteLine(" ");
+            Console.Write("Enter the ID of the branch you want to delete: ");
+            string id = Console.ReadLine();
 
-            if (index >= 0 && index < branches.Count)
+            Branch existing = branches.Find(b => b.ID == id);
+
+            if (existing != null)
             {
-                AppService.DeleteBranch(index);
+                AppService.DeleteBranch(id);
                 Console.WriteLine("Branch deleted successfully!");
             }
             else
             {
-                Console.WriteLine("Invalid branch number.");
+                Console.WriteLine("Branch ID was invalid.");
             }
         }
 

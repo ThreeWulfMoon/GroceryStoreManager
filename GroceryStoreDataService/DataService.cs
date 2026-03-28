@@ -23,14 +23,14 @@ namespace GroceryStoreDataService
             return _dataService.GetBranches();
         }
 
-        public void Update(int index, Branch branch)
+        public void Update(Branch branch)
         {
-            _dataService.Update(index, branch);
+            _dataService.Update(branch);
+        }
+        public void Delete(string id)
+        {
+            _dataService.Delete(id);
         }
 
-        public void Delete(int index)
-        {
-            _dataService.Delete(index);
-        }
     }
 }
