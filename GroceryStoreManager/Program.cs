@@ -63,14 +63,17 @@ namespace GroceryStoreManager
             Console.Write("Enter the Number of Employees you want: ");
             b.Employees = Console.ReadLine(); ;
 
-            AppService.CreateBranch(b);
+            AppService appservice = new AppService();
+            appservice.CreateBranch(b);
+
 
             Console.WriteLine("New Branch Established!");
         }
 
         static void Read()
         {
-            List<Branch> branches = AppService.GetBranches();
+            AppService appservice = new AppService();
+            List<Branch> branches = appservice.GetBranches();
 
             Console.WriteLine("\n ----- Current SupaMart Branches Available for Viewing ----- \n");
             for (int i = 0; i < branches.Count; i++)
@@ -96,7 +99,8 @@ namespace GroceryStoreManager
 
         static void Update()
         {
-            List<Branch> branches = AppService.GetBranches();
+            AppService appservice = new AppService();
+            List<Branch> branches = appservice.GetBranches();
 
             Console.WriteLine("\n--- Current Branches that are Available for Update ---\n");
             Console.WriteLine(" ");
@@ -130,7 +134,7 @@ namespace GroceryStoreManager
                 Console.Write("Enter new number of Employees: ");
                 upd.Employees = Console.ReadLine();
 
-                AppService.UpdateBranch(upd);
+                appservice.UpdateBranch(upd);
 
                 Console.WriteLine("Branch updated successfully!");
             }
@@ -142,7 +146,8 @@ namespace GroceryStoreManager
 
         static void Delete()
         {
-            List<Branch> branches = AppService.GetBranches();
+            AppService appservice = new AppService();
+            List<Branch> branches = appservice.GetBranches();
 
             Console.WriteLine("\n--- Current Branches that are Available ---\n");
             for (int i = 0; i < branches.Count; i++)
@@ -157,7 +162,7 @@ namespace GroceryStoreManager
 
             if (existing != null)
             {
-                AppService.DeleteBranch(id);
+                appservice.DeleteBranch(id);
                 Console.WriteLine("Branch deleted successfully!");
             }
             else

@@ -6,25 +6,28 @@ namespace GroceryStoreAppService
 {
     public class AppService
     {
+        private DataService data = new DataService(new BranchDBData());
 
-        private static DataService data = new DataService(new BranchDBData());
-
-        public static void CreateBranch(Branch b)
+        public void CreateBranch(Branch b)
         {
             data.Add(b);
         }
 
-        public static List<Branch> GetBranches()
+        public List<Branch> GetBranches()
         {
             return data.GetBranches();
         }
 
-        public static void DeleteBranch(string id)
+        public Branch GetBranchById(string id)
+        {
+            return data.GetBranches().FirstOrDefault(x => x.ID == id);
+        }
+        public void DeleteBranch(string id)
         {
             data.Delete(id);
         }
 
-        public static void UpdateBranch(Branch updated)
+        public void UpdateBranch(Branch updated)
         {
             data.Update(updated);
         }
